@@ -8,11 +8,9 @@ from PIL import Image, ImageDraw, ImageFont
 
 import string
 
-headers = ['Name', 'Width', 'LSB', 'RSB', 'X', 'Y']
-
 metrics_dict = {}
 
-def export_svg_glyphs(font_path, output_directory):
+def export_png_glyphs(font_path, output_directory):
     # Load the TrueType font file
     font = TTFont(font_path)
 
@@ -46,9 +44,6 @@ def export_svg_glyphs(font_path, output_directory):
     for glyphName in glyphset.keys():
 
         if font["glyf"][glyphName].numberOfContours:
-            # if len(glyphset[glyphName].name) == 1 or glyphset[glyphName].name == "one" or glyphset[glyphName].name == "two" or glyphset[glyphName].name == "three" or glyphset[glyphName].name == "four" or glyphset[glyphName].name == "five" or glyphset[glyphName].name == "six" or glyphset[glyphName].name == "seven" or glyphset[glyphName].name == "eight" or glyphset[glyphName].name == "nine" or glyphset[glyphName].name == "zero":
-
-            # if glyphset[glyphName].name != ".notdef" and glyphset[glyphName].name != "acutecomb.case" and glyphset[glyphName].name != "uni0306.case" and glyphset[glyphName].name != 'uni03060301' and glyphset[glyphName].name != 'uni03060301.case':
 
             if glyphset[glyphName].name in chars:
 
@@ -85,7 +80,7 @@ def export_svg_glyphs(font_path, output_directory):
 
                 print(chars[glyphset[glyphName].name])
 
-                metrics_dict[str(cmap_index-1)+".png"] = {"ASCII": ascii_value, "Name": glyphName, "Width": width_, "LSB": lsb, "RSB": rsb, "X": "", "Y": ""}
+                metrics_dict[str(cmap_index-1)+".png"] = {"ASCII": ascii_value, "Name": glyphName, "Width": width_, "LSB": lsb, "RSB": rsb}
 
                 cmap_index += 1
 
@@ -98,6 +93,6 @@ def export_svg_glyphs(font_path, output_directory):
 
 
 font_path = "font.ttf"
-output_directory = "output/pngs"
+output_directory = "output/png_index"
 
-export_svg_glyphs(font_path, output_directory)
+export_png_glyphs(font_path, output_directory)
